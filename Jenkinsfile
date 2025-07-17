@@ -8,7 +8,6 @@ pipeline {
        // }
 
         stage('Build') {
-        stage('Build') {
             steps {
                 sh 'docker build -t nodejs-random-color:ver-${BUILD_ID} .'
             }
