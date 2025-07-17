@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        FULL_IMAGE = "430950558682.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:latest"
+        FULL_IMAGE = "126623035473.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:latest"
         TASK_DEFINITION =""
         NEW_TASK_DEFINITION=""
         NEW_TASK_INFO=""
@@ -16,13 +16,14 @@ pipeline {
         }
         stage('Upload image to ECR') {
             steps {
-                sh 'aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 430950558682.dkr.ecr.ap-southeast-1.amazonaws.com'
-
-                sh 'docker tag nodejs-random-color:ver-${BUILD_ID} 430950558682.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:ver-${BUILD_ID}'
-                sh 'docker tag nodejs-random-color:ver-${BUILD_ID} 430950558682.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:latest'
                 
-                sh 'docker push 430950558682.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:ver-${BUILD_ID}'
-                sh 'docker push 430950558682.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:latest'
+                sh 'aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 126623035473.dkr.ecr.ap-southeast-1.amazonaws.com'
+                
+                sh 'docker tag nodejs-random-color:ver-${BUILD_ID} 126623035473.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:ver-${BUILD_ID}'
+                sh 'docker tag nodejs-random-color:ver-${BUILD_ID} 126623035473.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:lastest'
+
+                sh 'docker push 126623035473.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:ver-${BUILD_ID}'
+                sh 'docker push 126623035473.dkr.ecr.ap-southeast-1.amazonaws.com/nodejs-random-color:lastest'
             }
         }
         stage('Update task definition and force deploy ecs service') {
